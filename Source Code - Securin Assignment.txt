@@ -1,0 +1,164 @@
+// Securin Assignment Part A Source Code:
+
+
+
+public class DiceChallenge {
+
+    public static void main(String[] args) {
+   
+        int totalCombinations = 6 * 6;
+        System.out.println("Total Possible Outcomes: " + totalCombinations);
+        System.out.println();
+        int[][] combinations = calculateCombinations();
+        printCombinations(combinations);
+         System.out.println();
+        calculateProbabilities(combinations, totalCombinations);
+    }
+
+    public static int[][] calculateCombinations() {
+        int[][] combinations = new int[6][6];
+
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                combinations[i][j] = (i + 1) + (j + 1);
+            }
+        }
+
+        return combinations;
+    }
+
+    public static void printCombinations(int[][] combinations) {
+        System.out.println("Distribution of all possible combinations:");
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                System.out.print(combinations[i][j] + "  ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void calculateProbabilities(int[][] combinations, int totalCombinations) {
+        System.out.println("Probability of all possible sums:");
+        int[] frequency = new int[13];
+
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                frequency[combinations[i][j]]++;
+            }
+        }
+
+        for (int i = 2; i <= 12; i++) {
+            double probability = (double) frequency[i] / totalCombinations;
+            System.out.println("P(Sum = " + i + ") = " + probability);
+        }
+    }
+}
+
+
+
+
+// Securin Assignment Part B Source Code:
+
+
+
+import java.util.Arrays;
+
+public class DChallenge {
+
+    public static void main(String[] args) {
+        double[] prob = new double[13];
+        double x=1.0;
+        for(int i=2;i<=7;i++){
+            prob[i] = x/36.0;
+            x++;
+            
+        }
+        x=x-2;
+        for(int j=8;j<=12;j++){
+            prob[j]=x/36.0;
+            x--;
+        }
+        
+        int totalCombinations = 6 * 6;
+        int[] a1 ={1,2,3,4,5,6};
+        for(int k=0;k<6;k++){
+            if(a1[k]>4)
+                a1[k]=a1[k]/2;
+        }
+        Arrays.sort(a1);
+        
+        int[] a2= {1,2,3,4,5,6};
+        for(int l=0;l<6;l++)
+        {
+
+        a2[l]=a2[l]+6;
+        
+        int[][] combinations = new int[6][6];
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                combinations[i][j] = ((a1[i])) + ((a2[j]));
+            }
+        }
+        int[] frequency = new int[13];
+
+        for (int k = 0; k < 6; k++) {
+            for (int m = 0; m < 6; m++) {
+                frequency[combinations[k][m]]++;
+            }
+        }
+        double[] prob1 = new double[13];
+        
+        for (int i = 2; i <= 12; i++) {
+            double probability = (double) frequency[i] / totalCombinations;
+            
+            prob1[i]=probability;
+         }
+
+
+        if(prob[12]==prob1[12]){
+            break;
+        }
+        else{
+            a2[l]=a2[l]-6;
+        }
+        
+        
+        }
+
+        System.out.println("Dice A");
+        for(int p=0;p<6;p++){
+            System.out.print(" "+a1[p]);
+        }
+        System.out.println("");
+        
+
+        Arrays.sort(a2);
+        System.out.println("Dice B");
+        for(int p=0;p<6;p++){
+            System.out.print(" "+a2[p]);
+        }
+        System.out.println("");
+        
+   }
+}
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
